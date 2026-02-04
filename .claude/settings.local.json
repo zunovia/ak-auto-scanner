@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./run_scanner.bat)",
+      "Bash(tree:*)",
+      "Bash(ls:*)",
+      "Bash(./build_exe.bat)",
+      "Bash(./create_release.bat)",
+      "Bash(./setup_github.bat)",
+      "Bash(git add:*)"
+    ]
+  }
+}
