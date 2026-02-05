@@ -155,10 +155,12 @@ class Scanner:
             logger.info(f"Capture region (with margins): {capture_region}")
             logger.info(f"Margins applied: top={self.config.margin_top}, bottom={self.config.margin_bottom}, left={self.config.margin_left}, right={self.config.margin_right}")
 
-            # Click bottom of window to ensure focus (avoids links in content area)
+            # Use keyboard input instead of clicking to avoid triggering links
             self._notify_progress("Ensuring Kindle window has focus...", 0.12, 0)
-            self.page_capturer.click_window_center(capture_region)
-            time.sleep(1.5)  # Wait longer to ensure focus
+            logger.info("Using Ctrl key press to establish focus (avoids clicking links)")
+            import pyautogui
+            pyautogui.press('ctrl')  # Press Ctrl key - has no effect but establishes focus
+            time.sleep(1.5)  # Wait for focus to be established
 
             # Test capture
             self._notify_progress("Testing screenshot capture...", 0.15, 0)
@@ -297,6 +299,12 @@ class Scanner:
                 logger.debug(f"Page {page_num} similarity: {similarity:.4f} (exact mode - continuing)")
 
             previous_img_path = captured_path
+
+            # Re-activate window every 5 pages to maintain focus
+            if page_num % 5 == 0:
+                logger.debug(f"Re-activating window at page {page_num} to maintain focus")
+                self.window_manager.activate_window(kindle_hwnd)
+                time.sleep(0.3)
 
             # Turn page with retry
             page_turned = self.page_capturer.turn_page()

@@ -1,5 +1,29 @@
 # 📝 Release Notes
 
+## Version 1.0.6 (2026-02-05)
+
+### 🐛 Bug Fixes
+
+- **Link clicking completely eliminated**: Removed all window clicking, now using Ctrl key press for focus
+- **Window height increased**: Increased from 920px to 1040px (~6cm taller than original)
+- **Auto window reactivation**: Window is re-activated every 5 pages to maintain focus
+- **No more page jumps**: Links can no longer be accidentally triggered
+
+### 🔧 Technical Changes
+
+- Replaced mouse click with safe keyboard input (Ctrl key) for focus
+- Added periodic window reactivation (every 5 pages)
+- Window geometry: 550x1040 pixels
+
+### 📝 How It Works Now
+
+1. Uses `SetForegroundWindow()` to activate Kindle window
+2. Presses Ctrl key (harmless) to establish keyboard focus
+3. Re-activates window every 5 pages to maintain focus
+4. Never clicks anywhere in the window - completely avoids links
+
+---
+
 ## Version 1.0.5 (2026-02-05)
 
 ### 🐛 Bug Fixes
