@@ -155,10 +155,11 @@ class Scanner:
             logger.info(f"Capture region (with margins): {capture_region}")
             logger.info(f"Margins applied: top={self.config.margin_top}, bottom={self.config.margin_bottom}, left={self.config.margin_left}, right={self.config.margin_right}")
 
-            # Click window center to ensure focus
+            # Skip clicking to avoid accidentally clicking links in Kindle
+            # SetForegroundWindow (already called above) is sufficient for focus
             self._notify_progress("Ensuring Kindle window has focus...", 0.12, 0)
-            self.page_capturer.click_window_center(capture_region)
-            time.sleep(1.5)  # Wait longer to ensure focus
+            logger.info("Skipping window click to avoid triggering links")
+            time.sleep(1.0)  # Wait for window to be ready
 
             # Test capture
             self._notify_progress("Testing screenshot capture...", 0.15, 0)

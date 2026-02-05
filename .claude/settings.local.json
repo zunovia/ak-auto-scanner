@@ -7,7 +7,17 @@
       "Bash(./build_exe.bat)",
       "Bash(./create_release.bat)",
       "Bash(./setup_github.bat)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git config:*)",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(cmd /c:*)",
+      "Bash(test:*)",
+      "Bash(venv/Scripts/python.exe -m PyInstaller:*)",
+      "Bash(git commit:*)",
+      "Bash(powershell -Command:*)",
+      "Bash(gh release create:*)"
     ]
   }
 }
