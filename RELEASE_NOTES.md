@@ -1,5 +1,25 @@
 # 📝 Release Notes
 
+## Version 1.0.3 (2026-02-05)
+
+### 🐛 Bug Fixes
+
+- **Fixed keyboard focus loss**: Re-enabled window clicking at bottom area (90% down) to maintain keyboard focus
+- **Improved page turning reliability**: Window is re-activated automatically when page turn fails
+- **Smarter retry logic**: Failed page turns now trigger window re-activation before retry
+
+### 🔧 Technical Changes
+
+- Click position moved to bottom area (90% from top) to avoid links while maintaining focus
+- Added automatic window re-activation on page turn failure
+- Enhanced focus management throughout scan process
+
+### 📝 Background
+
+Previous version (v1.0.2) removed window clicking to avoid link activation, but this caused keyboard focus loss, resulting in pages not turning properly. This version restores clicking but uses a safe bottom position.
+
+---
+
 ## Version 1.0.2 (2026-02-05)
 
 ### 🐛 Bug Fixes

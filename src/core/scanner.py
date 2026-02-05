@@ -155,11 +155,10 @@ class Scanner:
             logger.info(f"Capture region (with margins): {capture_region}")
             logger.info(f"Margins applied: top={self.config.margin_top}, bottom={self.config.margin_bottom}, left={self.config.margin_left}, right={self.config.margin_right}")
 
-            # Skip clicking to avoid accidentally clicking links in Kindle
-            # SetForegroundWindow (already called above) is sufficient for focus
+            # Click bottom of window to ensure focus (avoids links in content area)
             self._notify_progress("Ensuring Kindle window has focus...", 0.12, 0)
-            logger.info("Skipping window click to avoid triggering links")
-            time.sleep(1.0)  # Wait for window to be ready
+            self.page_capturer.click_window_center(capture_region)
+            time.sleep(1.5)  # Wait longer to ensure focus
 
             # Test capture
             self._notify_progress("Testing screenshot capture...", 0.15, 0)
@@ -302,11 +301,13 @@ class Scanner:
             # Turn page with retry
             page_turned = self.page_capturer.turn_page()
             if not page_turned:
-                logger.warning("Failed to turn page, retrying...")
+                logger.warning("Failed to turn page, re-activating window and retrying...")
+                # Re-activate window to ensure focus
+                self.window_manager.activate_window(kindle_hwnd)
                 time.sleep(0.5)
                 page_turned = self.page_capturer.turn_page()
                 if not page_turned:
-                    logger.error("Failed to turn page after retry")
+                    logger.error("Failed to turn page after retry and window re-activation")
 
             # Small delay between captures
             time.sleep(0.2)
