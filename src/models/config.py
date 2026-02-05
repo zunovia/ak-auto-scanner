@@ -48,7 +48,7 @@ class ScanConfig:
     similarity_threshold: float = 0.95  # SSIM threshold for detecting duplicates
 
     # Limits
-    max_pages: int = 500  # Maximum pages to scan before auto-stop
+    max_pages: int = 10000  # Maximum pages to scan before auto-stop
 
     # Paths
     output_path: Optional[Path] = None  # PDF output path

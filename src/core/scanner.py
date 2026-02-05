@@ -219,10 +219,10 @@ class Scanner:
         """
         previous_img_path: Optional[Path] = None
         consecutive_duplicates = 0
-        max_consecutive_duplicates = 3  # Stop after 3 duplicate pages
+        max_consecutive_duplicates = 5  # Stop after 5 duplicate pages (more robust)
 
-        # Determine scan mode: exact page count (50/100) or auto-detect (500)
-        use_auto_stop = self.config.max_pages >= 500
+        # Determine scan mode: exact page count (50/100) or auto-detect (large number)
+        use_auto_stop = self.config.max_pages >= 1000
         scan_mode = "auto-detect end" if use_auto_stop else f"exact {self.config.max_pages} pages"
         logger.info(f"Scan mode: {scan_mode}")
 
@@ -298,9 +298,14 @@ class Scanner:
 
             previous_img_path = captured_path
 
-            # Turn page
-            if not self.page_capturer.turn_page():
-                logger.warning("Failed to turn page")
+            # Turn page with retry
+            page_turned = self.page_capturer.turn_page()
+            if not page_turned:
+                logger.warning("Failed to turn page, retrying...")
+                time.sleep(0.5)
+                page_turned = self.page_capturer.turn_page()
+                if not page_turned:
+                    logger.error("Failed to turn page after retry")
 
             # Small delay between captures
             time.sleep(0.2)

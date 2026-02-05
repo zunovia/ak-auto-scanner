@@ -125,7 +125,7 @@ class MainWindow:
         try:
             # Get page count setting
             page_count = self.settings_panel.get_page_count()
-            max_pages = page_count if page_count > 0 else 500  # 0 = all pages (up to 500)
+            max_pages = page_count if page_count > 0 else 10000  # 0 = all pages (up to 10000)
 
             # Create configuration
             config = ScanConfig(
