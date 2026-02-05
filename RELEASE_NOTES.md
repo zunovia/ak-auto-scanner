@@ -1,5 +1,23 @@
 # 📝 Release Notes
 
+## Version 1.0.1 (2026-02-05)
+
+### 🐛 Bug Fixes
+
+- **Fixed premature scan termination**: Increased "All pages" mode limit from 500 to 10,000 pages
+- **Improved scan reliability**: Changed auto-stop detection threshold from 500 to 1,000 pages
+- **More robust end-of-book detection**: Increased duplicate detection threshold from 3 to 5 consecutive duplicates to prevent false positives
+- **Better page turning reliability**: Added retry logic when page turning fails
+
+### 🔧 Technical Changes
+
+- Modified `max_pages` default from 500 to 10,000 in config
+- Updated scan mode threshold to use 1,000 pages for auto-detect mode
+- Enhanced page turning with automatic retry on failure
+- More resilient handling of temporary page turn failures
+
+---
+
 ## Version 1.0.0 (2026-02-04)
 
 ### 🎉 Initial Release
