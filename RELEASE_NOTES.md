@@ -1,5 +1,18 @@
 # 📝 Release Notes
 
+## Version 1.0.5 (2026-02-05)
+
+### 🐛 Bug Fixes
+
+- **Window height increased**: Increased window height from 800px to 920px (~3cm taller)
+- **Settings panel fully visible**: All settings now visible without scrolling or cutoff
+
+### 🔧 Technical Changes
+
+- Window geometry changed from 550x800 to 550x920 pixels
+
+---
+
 ## Version 1.0.4 (2026-02-05)
 
 ### ✨ New Features

@@ -21,7 +21,7 @@ class MainWindow:
         """Initialize main window."""
         self.root = tk.Tk()
         self.root.title("AK Auto-Scanner")
-        self.root.geometry("550x800")
+        self.root.geometry("550x920")  # Increased height by ~120px (~3cm)
         self.root.resizable(False, False)
 
         # State
