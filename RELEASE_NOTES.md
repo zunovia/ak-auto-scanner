@@ -1,5 +1,21 @@
 # 📝 Release Notes
 
+## Version 1.0.2 (2026-02-05)
+
+### 🐛 Bug Fixes
+
+- **Fixed accidental link clicks**: Removed window center click that was triggering links in Kindle pages
+- **Prevent page jumps**: Scanning no longer stops when encountering linked text (e.g., in table of contents)
+- **More reliable scanning**: SetForegroundWindow is now sufficient for window focus without clicking
+
+### 🔧 Technical Changes
+
+- Disabled window click during initial setup to avoid triggering internal links
+- Updated click_window_center method to use bottom area (90% down) if needed in future
+- This ensures continuous scanning regardless of link presence on pages
+
+---
+
 ## Version 1.0.1 (2026-02-05)
 
 ### 🐛 Bug Fixes

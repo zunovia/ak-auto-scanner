@@ -48,3 +48,7 @@ ENV/
 output/
 temp/
 *.pdf
+
+# Release files
+release/
+*.zip

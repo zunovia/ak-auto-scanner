@@ -4,7 +4,7 @@ echo AK Auto-Scanner Release Creator
 echo ========================================
 echo.
 
-set VERSION=1.0.1
+set VERSION=1.0.2
 
 REM Check if dist folder exists
 if not exist "dist\AKAutoScanner" (
