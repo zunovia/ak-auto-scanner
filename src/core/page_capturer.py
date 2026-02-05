@@ -171,21 +171,21 @@ class PageCapturer:
     @staticmethod
     def click_window_center(region: Tuple[int, int, int, int]):
         """
-        Click near the bottom of a window region to ensure focus.
-        Uses bottom area to avoid clicking on links which are typically in the content area.
+        Click at the bottom-right corner of window to ensure focus.
+        Uses corner position where links never exist.
 
         Args:
             region: Tuple of (left, top, right, bottom) coordinates
         """
         try:
             left, top, right, bottom = region
-            # Click near the bottom to avoid links (usually in content area)
-            # Use horizontal center but vertical position near bottom (90% down)
-            center_x = (left + right) // 2
-            click_y = int(top + (bottom - top) * 0.9)  # 90% down from top
+            # Click at bottom-right corner where links never exist
+            # Use 95% horizontal and 95% vertical to stay within window bounds
+            click_x = int(left + (right - left) * 0.95)  # 95% from left
+            click_y = int(top + (bottom - top) * 0.95)   # 95% from top
 
-            logger.debug(f"Clicking window bottom area: ({center_x}, {click_y}) to avoid links")
-            pyautogui.click(center_x, click_y)
+            logger.debug(f"Clicking window corner: ({click_x}, {click_y}) to avoid links")
+            pyautogui.click(click_x, click_y)
             time.sleep(0.2)
 
         except Exception as e:

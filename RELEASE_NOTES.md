@@ -1,5 +1,26 @@
 # 📝 Release Notes
 
+## Version 1.0.4 (2026-02-05)
+
+### ✨ New Features
+
+- **Custom page count input**: Added ability to enter any custom page number (e.g., 200, 300, 500 pages)
+- **Japanese default**: Changed default direction to Japanese (和書) for better user experience
+
+### 🐛 Bug Fixes
+
+- **Click position optimized**: Moved click from bottom-center to bottom-right corner (95%, 95%)
+- **Link avoidance improved**: Corner position ensures links are never clicked accidentally
+- **50-page mode link skip fixed**: Pages with links are no longer skipped
+
+### 🎯 How to Use Custom Pages
+
+1. Select "Custom (カスタム)" in Scan Mode
+2. Enter desired page count in the input field (e.g., 200)
+3. Click "Start Scanning"
+
+---
+
 ## Version 1.0.3 (2026-02-05)
 
 ### 🐛 Bug Fixes

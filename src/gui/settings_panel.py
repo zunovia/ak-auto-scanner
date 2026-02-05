@@ -23,10 +23,11 @@ class SettingsPanel(ttk.Frame):
         self.on_change = on_change
 
         # Variables
-        self.direction_var = tk.StringVar(value=Direction.WESTERN.value)
+        self.direction_var = tk.StringVar(value=Direction.JAPANESE.value)  # Default to Japanese
         self.resolution_var = tk.StringVar(value=Resolution.MEDIUM.value)
         self.speed_var = tk.DoubleVar(value=1.0)
         self.page_count_var = tk.IntVar(value=0)  # 0 = all pages
+        self.custom_page_count_var = tk.StringVar(value="")  # Custom page count input
 
         # Margin variables (negative values expand the capture area)
         self.margin_top_var = tk.IntVar(value=-20)
@@ -114,6 +115,7 @@ class SettingsPanel(ttk.Frame):
             ("50 pages (50ページずつ)", 50),
             ("100 pages (100ページずつ)", 100),
             ("All pages (全ページ自動) ★", 0),
+            ("Custom (カスタム)", -1),  # -1 indicates custom mode
         ]
 
         for text, value in page_count_options:
@@ -124,6 +126,15 @@ class SettingsPanel(ttk.Frame):
                 value=value,
                 command=self._on_setting_change
             ).pack(anchor="w")
+
+        # Custom page count input
+        custom_frame = ttk.Frame(page_count_frame)
+        custom_frame.pack(anchor="w", padx=(20, 0), pady=(5, 0))
+
+        ttk.Label(custom_frame, text="Custom pages (カスタムページ数):").pack(side="left", padx=(0, 5))
+        custom_entry = ttk.Entry(custom_frame, textvariable=self.custom_page_count_var, width=10)
+        custom_entry.pack(side="left")
+        ttk.Label(custom_frame, text="pages", font=("Arial", 8)).pack(side="left", padx=(5, 0))
 
         # Margin settings
         margin_frame = ttk.LabelFrame(self, text="Capture Margins (キャプチャ余白調整)", padding="5")
@@ -230,8 +241,15 @@ class SettingsPanel(ttk.Frame):
         return self.speed_var.get()
 
     def get_page_count(self) -> int:
-        """Get selected page count (0 = all pages)."""
-        return self.page_count_var.get()
+        """Get selected page count (0 = all pages, -1 = use custom value)."""
+        selected = self.page_count_var.get()
+        if selected == -1:  # Custom mode
+            try:
+                custom_value = int(self.custom_page_count_var.get())
+                return custom_value if custom_value > 0 else 0
+            except (ValueError, TypeError):
+                return 0  # Default to all pages if invalid input
+        return selected
 
     def get_margin_top(self) -> int:
         """Get top margin."""
